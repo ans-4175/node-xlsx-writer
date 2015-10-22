@@ -93,7 +93,7 @@ class XlsxWriter
             (cb) =>
                 stringTable = ''
                 for string in @strings
-                    string = string + ""
+                    #string = string + ""
                     stringTable += blobs.string(@escapeXml(string))
                 fs.writeFile(@_filename('xl', 'sharedStrings.xml'), blobs.stringsHeader(@strings.length) + stringTable + blobs.stringsFooter, cb)
             (cb) => zipfile.addFile(@_filename('[Content_Types].xml'), '[Content_Types].xml', cb)
@@ -157,6 +157,7 @@ class XlsxWriter
         @sheetStream.write(@rowBuffer + blobs.endRow)
 
     escapeXml: (str = '') ->
+        #str = str + ""
         return str.replace(/&/g, '&amp;')
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;')
